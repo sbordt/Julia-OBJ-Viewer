@@ -1,16 +1,13 @@
 using GLWindow, GLAbstraction, GLFW, ModernGL, ImmutableArrays, WavefrontObj, Gtk
 using GLPlot #toopengl 
 
-include("../include.jl")
+include("include.jl")
 
 function open_obj_dialog()
 	return open_dialog("Select an .obj file!", filters=("*.obj",))
 end
 
-#objpath = "assets/models/Elephant/elephant.obj"
-#objpath = "assets/models/cat/cat.obj"
-#objpath = "assets/models/Butterfly/Butterfly.obj"
-#objpath = "assets/models/airboat.obj"
+#objpath = "../assets/models/airboat.obj"
 objpath = open_obj_dialog()
 
 assets_path = objpath[1:rsearchindex(objpath, "/")]
@@ -34,7 +31,7 @@ window = createwindow("OBJ-Viewer", 1000, 1000, debugging = false)
 cam = PerspectiveCamera(window.inputs, Vec3(2,2,0.5), Vec3(0.0))
 
 # render objects creation
-shader = TemplateProgram("assets/shaders/standard.vert", "assets/shaders/phongblinn.frag")
+shader = TemplateProgram("../assets/shaders/standard.vert", "../assets/shaders/phongblinn.frag")
 render_objects = []
 
 compiled_materials = Dict()
@@ -88,7 +85,7 @@ for material_name in collect(keys(obj.materials))
 				data[:diffuse_texture] 		= Texture( assets_path*mtl.diffuse_texture )				
 			else
 				data[:use_diffuse_texture] 	= 0.0f0
-				data[:diffuse_texture] 		= Texture( "assets/default.jpg" )
+				data[:diffuse_texture] 		= Texture( "../assets/default.png" )
 			end
 
 			break
@@ -103,7 +100,7 @@ for material_name in collect(keys(obj.materials))
 		data[:material_specular_exponent]	= 1.0f0
 
 		data[:use_diffuse_texture]			= 0.0f0
-		data[:diffuse_texture] 				= Texture( "assets/default.jpg" )
+		data[:diffuse_texture] 				= Texture( "../assets/default.png" )
 	end
 
 	ro = RenderObject(data, shader)

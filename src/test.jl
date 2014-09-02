@@ -2,9 +2,9 @@ using WavefrontObj
 
 #@time obj = readObjFile("nvidia-examples/InstancedTessellation/assets/models/Butterfly/Butterfly.obj", compute_normals = false, triangulate = false)
 
-objpath = "obj-viewer/assets/models/Elephant/Elephant.obj"
+#objpath = "obj-viewer/assets/models/Elephant/Elephant.obj"
 #objpath = "obj-viewer/assets/models/buddha.obj" # only v, vt, vt, f, double values in v
-#objpath = "obj-viewer/assets/models/airboat.obj" # g (no default), s, usemtl, faces with no material 
+objpath = "../assets/models/airboat.obj" # g (no default), s, usemtl, faces with no material 
 #objpath = "obj-viewer/assets/models/Butterfly/Butterfly.obj"
 
 obj = readObjFile(objpath, faceindextype = Uint32, vertextype=Float32, compute_normals = false, triangulate = false)
@@ -34,7 +34,7 @@ for material in collect(keys(obj.materials))
 	println("material $material : $(length(fcs_compiled)) faces")
 end
 
-mtls = readMtlFile("nvidia-examples/InstancedTessellation/assets/models/Butterfly/Butterfly.mtl")
-for mtl in mtls
-	println(mtl)
-end 
+#mtls = readMtlFile("nvidia-examples/InstancedTessellation/assets/models/Butterfly/Butterfly.mtl")
+#for mtl in mtls
+#	println(mtl)
+#end 
